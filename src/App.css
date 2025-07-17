@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --color-primary-50: oklch(0.971 0.024 280.5);
+  --color-primary-100: oklch(0.942 0.048 280.5);
+  --color-primary-200: oklch(0.891 0.093 280.5);
+  --color-primary-300: oklch(0.827 0.145 280.5);
+  --color-primary-400: oklch(0.737 0.192 280.5);
+  --color-primary-500: oklch(0.634 0.225 280.5);
+  --color-primary-600: oklch(0.539 0.239 280.5);
+  --color-primary-700: oklch(0.456 0.227 280.5);
+  --color-primary-800: oklch(0.391 0.199 280.5);
+  --color-primary-900: oklch(0.339 0.168 280.5);
+  --color-primary-950: oklch(0.226 0.113 280.5);
+}
