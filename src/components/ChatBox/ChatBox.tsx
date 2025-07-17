@@ -1,30 +1,42 @@
-import React, { useState } from 'react';
+import {useState} from "react";
+
+import {Input} from "@/components/ui/input";
+import {PlaneIcon, Send} from "lucide-react";
+import {Button} from "../ui/button";
 
 export default function ChatBox() {
-	const [message, setMessage] = useState('');
+	const [message, setMessage] = useState("");
 
 	const handleSend = () => {
 		if (message.trim()) {
-			console.log('Message sent:', message);
-			setMessage('');
+			console.log("Message sent:", message);
+			setMessage("");
 		}
 	};
 
 	return (
-		<div className="flex flex-row items-center justify-center">
-			<input
+		<div className="flex flex-row items-center justify-center rounded-2xl">
+			<Input
 				type="text"
 				value={message}
 				onChange={(e) => setMessage(e.target.value)}
-				placeholder="Ask me anything about your document..."
-				className="w-full p-2 border border-transparent focus:border-transparent rounded"
+				placeholder="Type your message..."
+				className="flex-grow mr-2 border-0 focus:border-0 focus:ring-0 focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-200 rounded-4xl shadow-sm"
+				onKeyDown={(e) => {
+					if (e.key === "Enter") {
+						handleSend();
+						e.preventDefault();
+					}
+				}}
 			/>
-			<button
+
+			<Button
 				onClick={handleSend}
-				className="px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600 transition-colors"
+				variant="secondary"
+				className="bg-gray-100 dark:bg-black hover:scale-110 transition-transform duration-200"
 			>
-				Send
-			</button>
+				<Send className="text-primary-900 dark:text-gray-100" />
+			</Button>
 		</div>
 	);
 }

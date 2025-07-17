@@ -21,7 +21,7 @@
 // 	);
 // }
 
-import {Calendar, MessageSquare, Inbox, Search, Settings} from "lucide-react";
+import {Calendar, MessageSquare, Inbox, Search, Settings, UploadIcon, MessageCircle, FileIcon} from "lucide-react";
 
 import {
 	Sidebar,
@@ -34,22 +34,50 @@ import {
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-// Menu items.
+import {Button} from "@/components/ui/button";
+import { useFiles } from "@/hooks/useFiles";
+
 const items = [
 	{
 		title: "How to use arc-fusion-chat",
 		url: "#",
-		icon: MessageSquare,
+		icon: MessageCircle,
 	},
 ];
 
+
 export default function AppSidebar() {
+	const { files, loading, error } = useFiles();
 	return (
 		<Sidebar
 			variant="inset"
-			className=" dark:bg-slate-900 dark:text-white bg-gray-100 text-black border-r border-gray-200 dark:border-gray-700"
+			className=" dark:bg-slate-900 
+			dark:text-white bg-gray-100 text-black border-r border-gray-200 dark:border-gray-700"
 		>
 			<SidebarContent>
+				<SidebarGroup>
+					<SidebarGroupLabel className="dark:text-white text-black">
+						Uploaded Files
+					</SidebarGroupLabel>
+					<SidebarGroupContent>
+						<SidebarMenu>
+							{files.map((item, index) => (
+								<SidebarMenuItem key={index}>
+									<SidebarMenuButton asChild>
+										<a href={item.url} className="text-black dark:text-white">
+											<FileIcon className="size-4" />
+											<span>{item.name}</span>
+										</a>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							))}
+						</SidebarMenu>
+					</SidebarGroupContent>
+					<Button variant="secondary" className="w-full bg-black text-white hover:bg-gray-800 rounded-4xl mt-4 cursor-pointer">
+						Upload File <UploadIcon className="ml-2 size-4" />
+					</Button>
+				</SidebarGroup>
+
 				<SidebarGroup>
 					<SidebarGroupLabel className="dark:text-white text-black">
 						Chat

@@ -5,7 +5,7 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Error from "@/pages/Error";
 
-import MainLayout from "@/components/MainLayout";
+import MainLayout from "@/layout";
 import '@/App.css'
 
 const AppContainer = ({children}: {children: React.ReactNode}) => {

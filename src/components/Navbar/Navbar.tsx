@@ -1,4 +1,4 @@
-import DarkModeToggle from "../DarkModeToggle";
+import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
 
 export default function Navbar() {
 	return (

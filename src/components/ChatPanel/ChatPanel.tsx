@@ -36,7 +36,7 @@ export default function ChatPanel() {
 	const OtherChat = ({user, message, avatar, showAnimation, isTyping}) => (
 		<div className="flex items-center mb-6 w-full">
 			<img src={avatar} alt={user} className="w-10 h-10 rounded-full mr-3" />
-			<div className=" dark:bg-slate-700 bg-slate-100 p-3 rounded-lg shadow-md">
+			<div className=" dark:bg-slate-700 bg-slate-100 px-6 py-2 rounded-4xl shadow-md">
 				{showAnimation ? (
 					<>
 						<TypeAnimation
@@ -54,8 +54,8 @@ export default function ChatPanel() {
 	);
 	const UserChat = ({user, message, avatar}) => (
 		<div className="flex row justify-end items-center mb-6">
-			<div className=" bg-slate-100 dark:bg-slate-700 p-3 rounded-lg shadow-md">
-				<p className="mt-1 text-slate-950 dark:text-white">{message}</p>
+			<div className=" bg-slate-100 dark:bg-slate-700 px-6 py-2 rounded-4xl shadow-md">
+				<p className="mt-1 text-slate-950 dark:text-white mb-0">{message}</p>
 			</div>
 			<img src={avatar} alt={user} className="w-10 h-10 rounded-full ml-3" />
 		</div>
@@ -85,7 +85,7 @@ export default function ChatPanel() {
 					)}
 				</div>
 			</div>
-			<div className="absolute bottom-10 left-10 right-10 rounded-2xl p-1 dark:bg-gray-900 dark:text-white bg-gray-300 text-gray-800">
+			<div className="absolute bottom-10 left-10 right-10">
 				<ChatBox />
 			</div>
 		</div>
