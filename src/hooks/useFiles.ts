@@ -33,20 +33,20 @@ export function useFiles() {
   return { files, loading, error };
 }
 
-export function useUploadFile() {
-  const [uploading, setUploading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+// export function useUploadFile() {
+//   const [uploading, setUploading] = useState<boolean>(false);
+//   const [error, setError] = useState<string | null>(null);
 
-  const uploadFile = async (file: File) => {
-	try {
-	  setUploading(true);
-	  await FileService.uploadFile(file);
-	} catch (err) {
-	  setError("Failed to upload file");
-	} finally {
-	  setUploading(false);
-	}
-  };
+//   const uploadFile = async (file: File) => {
+// 	try {
+// 	  setUploading(true);
+// 	  await FileService.uploadFile(file);
+// 	} catch (err) {
+// 	  setError("Failed to upload file");
+// 	} finally {
+// 	  setUploading(false);
+// 	}
+//   };
 
-  return { uploadFile, uploading, error };
-}
+//   return { uploadFile, uploading, error };
+// }

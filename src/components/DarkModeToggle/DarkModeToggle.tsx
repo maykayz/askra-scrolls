@@ -11,7 +11,7 @@ export default function DarkModeToggle() {
       size={30}
       className="fixed top-4 right-4 z-50"
       sunColor="#f59e0b"
-      moonColor="#1e3a8a"
+      moonColor="#fafafa"
     />
   )
 }

@@ -1,37 +1,19 @@
 import ChatBox from "@/components/ChatBox/ChatBox";
 import {TypeAnimation} from "react-type-animation";
+import Mascot from "../Mascot/Mascot";
+import {useChats} from "@/hooks/useChats";
 
 export default function ChatPanel() {
-	const chats = [
-		{
-			id: 1,
-			message: "Hello, how are you?",
-			timestamp: "2023-10-01 10:00 AM",
-			user: "User 1",
-			avatar: "https://avatar.iran.liara.run/public/boy?username=Ash",
-		},
-		{
-			id: 2,
-			message: "I am fine, thank you! How about you?",
-			timestamp: "2023-10-01 10:05 AM",
-			user: "User 2",
-			avatar: "https://avatar.iran.liara.run/public/98",
-		},
-		{
-			id: 3,
-			message: "I am doing well, thanks for asking!",
-			timestamp: "2023-10-01 10:10 AM",
-			user: "User 1",
-			avatar: "https://avatar.iran.liara.run/public/boy?username=Ash",
-		},
-		{
-			id: 4,
-			message: "What are you up to today?",
-			timestamp: "2023-10-01 10:15 AM",
-			user: "User 2",
-			avatar: "https://avatar.iran.liara.run/public/98",
-		},
-	];
+	const {chats, loading, error} = useChats();
+
+	console.log("Chats:", chats);
+
+	const mascotState = loading
+		? "loading"
+		: chats.length === 0
+		? "not-found"
+		: error ? "error"
+		: null;
 
 	const OtherChat = ({user, message, avatar, showAnimation, isTyping}) => (
 		<div className="flex items-center mb-6 w-full">
@@ -64,7 +46,12 @@ export default function ChatPanel() {
 		<div className="w-full h-full text-white p-16 relative">
 			<div className="w-full h-full md:pb-[200px] pb-[250px]">
 				<div className="w-full h-full overflow-y-auto flex flex-col items-end justify-end">
-					{chats.map((chat, index) =>
+					<Mascot
+						state={
+							mascotState
+						}
+					/>
+					{/* {chats.map((chat, index) =>
 						chat.user === "User 1" ? (
 							<UserChat
 								key={chat.id}
@@ -82,10 +69,16 @@ export default function ChatPanel() {
 								isTyping={true}
 							/>
 						)
-					)}
+					)} */}
 				</div>
 			</div>
-			<div className="absolute bottom-10 left-10 right-10">
+			<div
+				className={`absolute ${
+					chats.length
+						? "bottom-10 left-10 right-10"
+						: "bottom-0 right-0 left-0 top-0 translate-y-1/2"
+				} w-1/3 mx-auto transition-all duration-300`}
+			>
 				<ChatBox />
 			</div>
 		</div>

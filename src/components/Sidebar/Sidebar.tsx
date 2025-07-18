@@ -45,14 +45,27 @@ const items = [
 	},
 ];
 
+const files = [
+	{
+		name: "File 1",
+		url: "#",
+	},
+	{
+		name: "File 2",
+		url: "#",
+	},
+];
+
 
 export default function AppSidebar() {
 	const { files, loading, error } = useFiles();
 	return (
 		<Sidebar
 			variant="inset"
-			className=" dark:bg-slate-900 
-			dark:text-white bg-gray-100 text-black border-r border-gray-200 dark:border-gray-700"
+			className=" 
+			
+			dark:bg-slate-900 bg-gray-100
+			dark:text-white  text-black border-r border-gray-200 dark:border-gray-700"
 		>
 			<SidebarContent>
 				<SidebarGroup>
@@ -61,7 +74,7 @@ export default function AppSidebar() {
 					</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
-							{files.map((item, index) => (
+							{files?.map((item, index) => (
 								<SidebarMenuItem key={index}>
 									<SidebarMenuButton asChild>
 										<a href={item.url} className="text-black dark:text-white">
