@@ -5,7 +5,7 @@ interface MascotProps {
 }
 
 export default function Mascot({ state }: MascotProps) {
-  let label: String;
+  let label: string;
 
   if (!state) {
     return null;

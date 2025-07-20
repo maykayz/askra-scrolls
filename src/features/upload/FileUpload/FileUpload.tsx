@@ -40,8 +40,7 @@ export function FileUpload() {
       <div className="border-dashed border-2 border-primary-200 rounded-lg p-6 flex flex-col items-center justify-center bg-primary-100">
         <div
           {...getRootProps()}
-          className="cursor-pointer w-full h-full flex items-center justify-center"
-        >
+          className="cursor-pointer w-full h-full flex items-center justify-center">
           <input {...getInputProps()} />
         </div>
 
@@ -59,8 +58,7 @@ export function FileUpload() {
             <Button
               className="mt-4 ml-0 pl-0 text-md underline text-primary-700 cursor-pointer"
               variant="link"
-              onClick={open}
-            >
+              onClick={open}>
               Browse
             </Button>
           </p>
@@ -85,8 +83,7 @@ export function FileUpload() {
       <Button
         variant="secondary"
         className="mt-4 w-full bg-black text-white hover:bg-gray-800 rounded-4xl"
-        onClick={handleUploadFiles}
-      >
+        onClick={handleUploadFiles}>
         Upload Files
       </Button>
     </div>

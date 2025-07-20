@@ -1,6 +1,6 @@
 import { API_URL } from '@/constants/api';
 
-export const fetchChatHistory = async (id: String) => {
+export const fetchChatHistory = async (id: string) => {
   const response = await fetch(`${API_URL}/api/chat/${id}`);
   if (!response.ok) throw new Error(await response.text());
   return response.json();

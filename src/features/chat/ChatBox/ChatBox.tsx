@@ -47,8 +47,7 @@ export default function ChatBox() {
       <Button
         onClick={handleSend}
         variant="secondary"
-        className="bg-gray-100 dark:bg-black hover:scale-110 transition-transform duration-200"
-      >
+        className="bg-gray-100 dark:bg-black hover:scale-110 transition-transform duration-200">
         <Send className="text-primary-900 dark:text-gray-100" />
       </Button>
     </div>
