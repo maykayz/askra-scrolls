@@ -1,52 +1,50 @@
-import FileService from "@/services/FileService";
-import { useEffect, useState } from "react";
-
-export interface File {
-  id: string;
-  name: string;
-  url: string;
-  type: string;
-  size: number;
-}
+import FileService from '@/services/FileService';
+import { useFileStore } from '@/store/useFileStore';
+import { useEffect, useState } from 'react';
 
 export function useFiles() {
-  const [files, setFiles] = useState<File[]>([]);
+  const { files, setFiles } = useFileStore();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-	async function fetchFiles() {
-	  try {
-		setLoading(true);
-		const response = await FileService.getFiles();
-		setFiles(response.data);
-	  } catch (err) {
-		setError("Failed to load files");
-	  } finally {
-		setLoading(false);
-	  }
-	}
+    async function fetchFiles() {
+      try {
+        setLoading(true);
+        const response = await FileService.getFiles();
+        setFiles(response.files);
+      } catch (err) {
+        setError('Failed to load files');
+      } finally {
+        setLoading(false);
+      }
+    }
 
-	fetchFiles();
+    fetchFiles();
   }, []);
 
   return { files, loading, error };
 }
 
-// export function useUploadFile() {
-//   const [uploading, setUploading] = useState<boolean>(false);
-//   const [error, setError] = useState<string | null>(null);
+export function useUploadFiles() {
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-//   const uploadFile = async (file: File) => {
-// 	try {
-// 	  setUploading(true);
-// 	  await FileService.uploadFile(file);
-// 	} catch (err) {
-// 	  setError("Failed to upload file");
-// 	} finally {
-// 	  setUploading(false);
-// 	}
-//   };
+  const { files, setFiles } = useFileStore();
 
-//   return { uploadFile, uploading, error };
-// }
+  const uploadFiles = async (newFiles: File[]) => {
+    try {
+      setUploading(true);
+      const response = await FileService.uploadFiles(newFiles);
+      setFiles([...files, ...response.files]);
+      return response;
+    } catch (err) {
+      setError('Failed to upload files');
+      throw err;
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return { uploadFiles, uploading, error };
+}

@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+import { API_URL } from '@/constants/api';
 
 export const fetchFiles = async () => {
   const response = await fetch(`${API_URL}/api/files`);
@@ -6,13 +6,15 @@ export const fetchFiles = async () => {
   return response.json();
 };
 
-export const uploadFile = async (file: File) => {
+export const uploadFiles = async (files: File[]) => {
   const formData = new FormData();
-  formData.append("file", file);
+  files.forEach((file) => {
+    formData.append('files', file);
+  });
 
   const response = await fetch(`${API_URL}/api/upload`, {
-    method: "POST",
-    body: formData,
+    method: 'POST',
+    body: formData
   });
 
   if (!response.ok) throw new Error(await response.text());
@@ -21,7 +23,7 @@ export const uploadFile = async (file: File) => {
 
 const FileService = {
   getFiles: fetchFiles,
-  uploadFile: uploadFile,
+  uploadFiles: uploadFiles
 };
 
 export default FileService;

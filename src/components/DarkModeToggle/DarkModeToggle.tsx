@@ -1,5 +1,5 @@
 import { useDarkMode } from '@/hooks/useDarkMode';
-import { DarkModeSwitch } from 'react-toggle-dark-mode'
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 export default function DarkModeToggle() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -13,5 +13,5 @@ export default function DarkModeToggle() {
       sunColor="#f59e0b"
       moonColor="#fafafa"
     />
-  )
+  );
 }
