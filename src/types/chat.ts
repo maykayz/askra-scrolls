@@ -35,3 +35,9 @@ export type ChatStore = {
   messages: Message[];
   setMessages: (messages: Message[]) => void;
 };
+
+export type StreamMessage = {
+  type: 'chunk';
+  content: string;
+  is_final?: boolean;
+};

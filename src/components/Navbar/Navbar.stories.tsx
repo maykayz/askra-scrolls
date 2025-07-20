@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { BrowserRouter } from 'react-router-dom';
 
 import Navbar from './Navbar';
 
@@ -11,7 +10,7 @@ const meta = {
   },
   tags: ['autodocs'],
   decorators: [
-    (Story) => (
+    Story => (
       <div className="flex items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
         <Story />
       </div>

@@ -6,9 +6,9 @@ type FileUploadModalStore = {
   setIsModalOpen: (isOpen: boolean) => void;
 };
 
-const useFileUploadModalStore = create<FileUploadModalStore>((set) => ({
+const useFileUploadModalStore = create<FileUploadModalStore>(set => ({
   isModalOpen: false,
-  setIsModalOpen: (isOpen) => set({ isModalOpen: isOpen })
+  setIsModalOpen: isOpen => set({ isModalOpen: isOpen })
 }));
 
 export function useUploadModal() {

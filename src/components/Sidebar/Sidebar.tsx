@@ -33,14 +33,19 @@ export default function AppSidebar() {
 
   useEffect(() => {
     fetchChats();
-  }, []);
+  }, [fetchChats]);
+
+  /* 
+  	TODO: component too big - consider breaking it down into smaller components
+  */
 
   return (
     <Sidebar
       variant="inset"
       className=" 
-			dark:bg-slate-900 bg-gray-100
-			dark:text-white  text-black border-r border-gray-200 dark:border-gray-700">
+		dark:bg-slate-900 bg-gray-100
+		dark:text-white  text-black border-r border-gray-200 dark:border-gray-700"
+    >
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="dark:text-white text-black">
@@ -63,7 +68,8 @@ export default function AppSidebar() {
           <Button
             variant="secondary"
             className="w-full bg-black text-white hover:bg-gray-800 rounded-4xl mt-4 cursor-pointer"
-            onClick={() => setShowModal(true)}>
+            onClick={() => setShowModal(true)}
+          >
             Upload File <UploadIcon className="ml-2 size-4" />
           </Button>
         </SidebarGroup>
@@ -79,19 +85,17 @@ export default function AppSidebar() {
                       <MessageCircle className="size-4" />
                       <span>No chat history found</span>
                     </NavLink>
-                    {/* <a href="#" className="text-black dark:text-white">
-											<span>No chat history found</span>
-										</a> */}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
-              {chatHistory?.map((item) => (
+              {chatHistory?.map(item => (
                 <SidebarMenuItem key={item.chat_id}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={ROUTE_CONFIG.CHAT_DETAILS(item.chat_id)}
                       className="text-black dark:text-white"
-                      key={item.chat_id}>
+                      key={item.chat_id}
+                    >
                       <MessageCircle className="size-4" />
                       <span>{item.first_question}</span>
                     </NavLink>
@@ -104,7 +108,8 @@ export default function AppSidebar() {
               className="w-full bg-black text-white hover:bg-gray-800 rounded-4xl mt-4 cursor-pointer"
               onClick={() => {
                 navigate(ROUTE_CONFIG.CHAT);
-              }}>
+              }}
+            >
               Start New Chat
               <MessageCircle className="ml-2 size-4" />
             </Button>
@@ -115,12 +120,15 @@ export default function AppSidebar() {
         <Button
           variant="secondary"
           className="w-full bg-black text-white hover:bg-gray-800 rounded-4xl mt-4 cursor-pointer"
-          onClick={clearChatHistory}>
+          onClick={clearChatHistory}
+        >
           Clear Chat History
         </Button>
         <div className="flex items-center justify-center mt-4">
           <div
-            className={`w-2 h-2 ${isMemoryEnabled ? 'bg-green-500' : 'bg-red-500'} rounded-lg mt-2 mb-2 mr-2`}
+            className={`w-2 h-2 ${
+              isMemoryEnabled ? 'bg-green-500' : 'bg-red-500'
+            } rounded-lg mt-2 mb-2 mr-2`}
           />
           {isMemoryEnabled ? (
             <span className="text-green-500 text-sm">Memory Enabled</span>

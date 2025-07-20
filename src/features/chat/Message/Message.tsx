@@ -4,11 +4,7 @@ import { Atom } from 'react-loading-indicators';
 import { checkIfLessThanOneMinuteOld } from '@/utils/date';
 import type { Message } from '@/types/chat';
 
-type MessageProps = {
-  message: Message;
-};
-
-export default function Message({ message }: MessageProps) {
+export default function Message({ message }: { message: Message }) {
   const isLoading = message.is_typing;
   const isNewMessage = checkIfLessThanOneMinuteOld(message.timestamp);
 
@@ -41,12 +37,7 @@ export default function Message({ message }: MessageProps) {
     <>
       <Question />
       <div className="flex row w-full justify-start items-center mb-6">
-        {isLoading ? (
-          <Loading />
-        ) : (
-          // isNewMessage ? <AnswerWithAnimation /> :
-          <Answer />
-        )}
+        {isLoading ? <Loading /> : isNewMessage ? <AnswerWithAnimation /> : <Answer />}
       </div>
     </>
   );

@@ -7,7 +7,7 @@ import {
   isConnected
 } from '@/services/SocketService';
 import { useChatStore } from '@/store/useChatStore';
-import { Message } from '@/types/chat';
+import { Message, StreamMessage } from '@/types/chat';
 
 export const useSocket = () => {
   const isInitialized = useRef(false);
@@ -21,7 +21,7 @@ export const useSocket = () => {
         .then(() => {
           console.log(isConnected());
         })
-        .catch((error) => {
+        .catch(error => {
           console.error('Failed to establish WebSocket connection:', error);
         });
       isInitialized.current = true;
@@ -31,42 +31,41 @@ export const useSocket = () => {
     };
   }, []);
 
-  const handleMessage = (data: any) => {
-    if (data && data.type === 'chunk' && data.content !== lastChunk) {
-      setLastChunk(data.content);
-      const isLastMessage = messages[messages.length - 1]?.is_typing;
-      const messagesWithoutLast = messages.slice(0, -1);
-      if (isLastMessage) {
-        const updatedMessages = [
-          ...messagesWithoutLast,
-          {
-            ...messages[messages.length - 1],
-            answer: messages[messages.length - 1].answer + data.content,
-            is_typing: !data.is_final
-          }
-        ];
-        setMessages(updatedMessages);
-      } else {
-        setLastMessage((prev) => ({
-          ...prev,
-          answer: prev ? prev.answer + data.content : data.content
-        }));
-        const newMessage: Message = {
-          question: lastMessage?.question || '',
-          answer: data.content,
-          source: 'websocket',
-          timestamp: new Date().toISOString(),
-          user: 'Agent',
-          is_typing: !data.is_final
-        };
-        setMessages([...messages, newMessage]);
-      }
-    }
-  };
-
   useEffect(() => {
+    const handleMessage = (data: StreamMessage) => {
+      if (data && data.type === 'chunk' && data.content !== lastChunk) {
+        setLastChunk(data.content);
+        const isLastMessage = messages[messages.length - 1]?.is_typing;
+        const messagesWithoutLast = messages.slice(0, -1);
+        if (isLastMessage) {
+          const updatedMessages = [
+            ...messagesWithoutLast,
+            {
+              ...messages[messages.length - 1],
+              answer: messages[messages.length - 1].answer + data.content,
+              is_typing: !data.is_final
+            }
+          ];
+          setMessages(updatedMessages);
+        } else {
+          setLastMessage(prev => ({
+            ...prev,
+            answer: prev ? prev.answer + data.content : data.content
+          }));
+          const newMessage: Message = {
+            question: lastMessage?.question || '',
+            answer: data.content,
+            source: 'websocket',
+            timestamp: new Date().toISOString(),
+            user: 'Agent',
+            is_typing: !data.is_final
+          };
+          setMessages([...messages, newMessage]);
+        }
+      }
+    };
     onMessage(handleMessage);
-  }, [messages, lastChunk, lastMessage]);
+  }, [messages, lastChunk, lastMessage, setMessages]);
 
   return {
     initializeConnection,

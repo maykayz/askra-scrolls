@@ -1,11 +1,12 @@
 import { API_URL } from '@/constants/api';
+import { Message, StreamMessage } from '@/types/chat';
 
 class WebSocketService {
   private ws: WebSocket | null = null;
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 5;
   private reconnectDelay = 1000;
-  private messageHandlers: ((data: any) => void)[] = [];
+  private messageHandlers: ((data: StreamMessage) => void)[] = [];
 
   private getWebSocketUrl() {
     return API_URL.replace(/^https?/, 'ws') + '/api/ws/chat';
@@ -27,20 +28,20 @@ class WebSocketService {
         resolve();
       };
 
-      this.ws.onmessage = (event) => {
+      this.ws.onmessage = event => {
         try {
           const data = JSON.parse(event.data);
-          this.messageHandlers.forEach((handler) => handler(data));
+          this.messageHandlers.forEach(handler => handler(data));
         } catch (error) {
           console.error('Error parsing WebSocket message:', error);
         }
       };
 
-      this.ws.onclose = (event) => {
+      this.ws.onclose = () => {
         this.attemptReconnect();
       };
 
-      this.ws.onerror = (error) => {
+      this.ws.onerror = error => {
         console.error('WebSocket error:', error);
         reject(error);
       };
@@ -52,7 +53,7 @@ class WebSocketService {
       this.reconnectAttempts++;
 
       setTimeout(() => {
-        this.initializeConnection().catch((error) => {
+        this.initializeConnection().catch(error => {
           console.error('Reconnection failed:', error);
         });
       }, this.reconnectDelay * this.reconnectAttempts);
@@ -61,7 +62,7 @@ class WebSocketService {
     }
   }
 
-  sendMessage(message: any) {
+  sendMessage(message: Message) {
     if (!message || !message.question || !message.chat_id) {
       throw new Error("Message must contain 'question' and 'chat_id'");
     }
@@ -87,13 +88,13 @@ class WebSocketService {
             );
           }
         })
-        .catch((error) => {
+        .catch(error => {
           console.error('Failed to reconnect and send message:', error);
         });
     }
   }
 
-  onMessage(callback: (data: any) => void) {
+  onMessage(callback: (data: StreamMessage) => void) {
     this.messageHandlers.push(callback);
 
     return () => {
@@ -124,8 +125,9 @@ const webSocketService = new WebSocketService();
 
 export const initializeConnection = () => webSocketService.initializeConnection();
 export const disconnectSocket = () => webSocketService.disconnectSocket();
-export const sendMessage = (message: any) => webSocketService.sendMessage(message);
-export const onMessage = (callback: (data: any) => void) => webSocketService.onMessage(callback);
+export const sendMessage = (message: Message) => webSocketService.sendMessage(message);
+export const onMessage = (callback: (data: StreamMessage) => void) =>
+  webSocketService.onMessage(callback);
 export const isConnected = () => webSocketService.isConnected();
 
 export default webSocketService;

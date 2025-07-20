@@ -14,14 +14,14 @@ export function useFiles() {
         const response = await FileService.getFiles();
         setFiles(response.files);
       } catch (err) {
+        console.error('Failed to load files', err);
         setError('Failed to load files');
       } finally {
         setLoading(false);
       }
     }
-
     fetchFiles();
-  }, []);
+  }, [setFiles, setLoading, setError]);
 
   return { files, loading, error };
 }

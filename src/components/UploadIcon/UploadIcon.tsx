@@ -22,7 +22,8 @@ export default function UploadIcon({
         fill={fill}
         stroke={stroke}
         strokeWidth={strokeWidth}
-        preserveAspectRatio="xMidYMid meet">
+        preserveAspectRatio="xMidYMid meet"
+      >
         <path
           d="M46.0999 5.70125C46.5866 5.70125 46.9815 6.09634 46.9817 6.58308C46.9817 7.020094 46.5867 7.46492 46.0999 7.46492C41.9875 7.46502 38.2968 10.2158 37.1252 14.1524C36.9965 14.5864 36.5619 14.8481 36.1243 14.7686L36.1204 14.7735L36.0286 14.7462C35.5621 14.6071 35.2957 14.1163 35.4348 13.6495C36.7985 9.06687 41.0458 5.70135 46.0999 5.70125Z"
           fill={fill}

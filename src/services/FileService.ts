@@ -8,7 +8,7 @@ export const fetchFiles = async () => {
 
 export const uploadFiles = async (files: File[]) => {
   const formData = new FormData();
-  files.forEach((file) => {
+  files.forEach(file => {
     formData.append('files', file);
   });
 

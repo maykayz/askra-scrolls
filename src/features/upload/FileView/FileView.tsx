@@ -25,7 +25,8 @@ export default function FileView({ file, onDelete }: FileViewProps) {
           <div className="ml-4">
             <button
               className="text-red-400 hover:text-red-700 text-sm"
-              onClick={() => onDelete && onDelete(file)}>
+              onClick={() => onDelete && onDelete(file)}
+            >
               <TrashIcon className="size-5" />
             </button>
           </div>

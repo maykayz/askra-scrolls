@@ -17,6 +17,7 @@ export function useAllChats() {
       const response = await ChatService.fetchAllChats();
       setChatHistory(response.chats.reverse());
     } catch (err) {
+      console.error('Failed to load chats', err);
       setError('Failed to load chats');
     } finally {
       setLoading(false);
@@ -48,6 +49,7 @@ export function useCreateChat() {
       ]);
       return response.chat_id;
     } catch (err) {
+      console.error('Failed to create chat', err);
       setError('Failed to create chat');
       throw err;
     } finally {
@@ -59,8 +61,8 @@ export function useCreateChat() {
 }
 
 export function useSendMessage() {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading] = useState<boolean>(false);
+  const [error] = useState<string | null>(null);
   const { messages, setMessages } = useChatStore();
 
   const sendChatMessage = async (message: string, currentSessionId: string) => {
@@ -80,14 +82,14 @@ export function useSendMessage() {
     sendMessage({
       question: message,
       chat_id: currentSessionId
-    });
+    } as Message);
     setMessages(currentMessages);
   };
   return { sendChatMessage, loading, error };
 }
 
 export function useMessages() {
-  const { messages, setMessages, currentSessionId } = useChatStore();
+  const { messages, setMessages } = useChatStore();
 
   const fetchMessages = async (id: string) => {
     try {

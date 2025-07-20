@@ -12,9 +12,9 @@ type FileStore = {
   setFiles: (files: FileInfo[]) => void;
 };
 
-const useFileStore = create<FileStore>((set) => ({
+const useFileStore = create<FileStore>(set => ({
   files: [],
-  setFiles: (files) => set({ files: files })
+  setFiles: files => set({ files: files })
 }));
 
 export { useFileStore };
