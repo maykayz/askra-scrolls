@@ -35,7 +35,7 @@ export default function ChatBox() {
         value={message}
         onChange={e => setMessage(e.target.value)}
         placeholder="Ask anything you want to know ..."
-        className="flex-grow mr-2 border-0 shadow-none text-gray-900 dark:text-gray-200 rounded-lg ring-0 focus-visible:ring-0 "
+        className="flex-grow mr-2 border-0 shadow-none text-gray-900 dark:text-gray-200 rounded-lg ring-0 focus-visible:ring-0 placeholder-gray-600 dark:placeholder-gray-100"
         onKeyDown={e => {
           if (e.key === 'Enter') {
             handleSend();

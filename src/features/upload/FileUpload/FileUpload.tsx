@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { Button } from '@/components/ui/button';
-import UploadIcon from '@/components/UploadIcon';
+import UploadIcon from '@/features/upload/UploadIcon';
 import FileView from '@/features/upload/FileView';
 import { useUploadFiles } from '@/hooks/useFiles';
 import { useUploadModal } from '@/hooks/useUploadModal';
@@ -37,7 +37,7 @@ export function FileUpload() {
   return (
     <div className="p-4 dark:bg-slate-900 dark:text-white bg-white text-black rounded-lg">
       <h2 className="text-lg font-semibold mb-4">Upload File</h2>
-      <div className="border-dashed border-2 border-primary-200 rounded-lg p-6 flex flex-col items-center justify-center bg-primary-100">
+      <div className="border-dashed border-2 border-primary-200 dark:border-slate-600 rounded-lg p-6 flex flex-col items-center justify-center bg-primary-100 dark:bg-slate-900">
         <div
           {...getRootProps()}
           className="cursor-pointer w-full h-full flex items-center justify-center"

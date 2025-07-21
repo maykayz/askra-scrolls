@@ -44,8 +44,7 @@ export default function AppSidebar() {
       variant="inset"
       className=" 
 		dark:bg-slate-900 bg-gray-100
-		dark:text-white  text-black border-r border-gray-200 dark:border-gray-700"
-    >
+		dark:text-white  text-black border-r border-gray-200 dark:border-gray-700">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="dark:text-white text-black">
@@ -53,10 +52,20 @@ export default function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              {files?.length === 0 && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <span>
+                      <FileIcon className="size-4" />
+                      <span className="text-black dark:text-white">No files uploaded</span>
+                    </span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
               {files?.map((item, index) => (
                 <SidebarMenuItem key={index}>
                   <SidebarMenuButton asChild>
-                    <a href={item.filename} className="text-black dark:text-white">
+                    <a href={item.filename} className="text-black dark:text-white visited:text-black">
                       <FileIcon className="size-4" />
                       <span>{item.filename}</span>
                     </a>
@@ -68,8 +77,7 @@ export default function AppSidebar() {
           <Button
             variant="secondary"
             className="w-full bg-black text-white hover:bg-gray-800 rounded-4xl mt-4 cursor-pointer"
-            onClick={() => setShowModal(true)}
-          >
+            onClick={() => setShowModal(true)}>
             Upload File <UploadIcon className="ml-2 size-4" />
           </Button>
         </SidebarGroup>
@@ -94,8 +102,7 @@ export default function AppSidebar() {
                     <NavLink
                       to={ROUTE_CONFIG.CHAT_DETAILS(item.chat_id)}
                       className="text-black dark:text-white"
-                      key={item.chat_id}
-                    >
+                      key={item.chat_id}>
                       <MessageCircle className="size-4" />
                       <span>{item.first_question}</span>
                     </NavLink>
@@ -108,8 +115,7 @@ export default function AppSidebar() {
               className="w-full bg-black text-white hover:bg-gray-800 rounded-4xl mt-4 cursor-pointer"
               onClick={() => {
                 navigate(ROUTE_CONFIG.CHAT);
-              }}
-            >
+              }}>
               Start New Chat
               <MessageCircle className="ml-2 size-4" />
             </Button>
@@ -120,8 +126,7 @@ export default function AppSidebar() {
         <Button
           variant="secondary"
           className="w-full bg-black text-white hover:bg-gray-800 rounded-4xl mt-4 cursor-pointer"
-          onClick={clearChatHistory}
-        >
+          onClick={clearChatHistory}>
           Clear Chat History
         </Button>
         <div className="flex items-center justify-center mt-4">

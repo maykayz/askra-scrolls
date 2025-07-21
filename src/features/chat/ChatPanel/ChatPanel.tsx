@@ -7,15 +7,12 @@ import { useParams } from 'react-router-dom';
 import Message from '@/features/chat/Message/Message';
 import Navbar from '@/components/Navbar';
 
-const chatBoxStyles =
-  'absolute left-0 right-0 bottom-10 w-3/4 mx-auto transition-all duration-300 bg-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-sm border border-white/30 p-4';
-
 export default function ChatPanel() {
   const { messages, currentSessionId, setCurrentSessionId, setMessages } = useChatStore();
   const { fetchMessages } = useMessages();
   const { id } = useParams<{ id: string }>();
 
-  const mascotState = messages.length === 0 ? 'idle' : null;
+  const mascotState = messages.length === 0 ? 'not-found' : null;
 
   useEffect(() => {
     if (!id) {
@@ -42,7 +39,10 @@ export default function ChatPanel() {
           ))}
         </div>
       </div>
-      <div className={chatBoxStyles}>
+      <div
+        className={`sticky left-0 right-0 bottom-10 w-3/4 mx-auto transition-all duration-300
+        bg-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-sm border border-white/30 p-4
+        `}>
         <ChatBox />
       </div>
     </div>
