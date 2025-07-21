@@ -33,10 +33,10 @@ export default function AppSidebar() {
 
   useEffect(() => {
     fetchChats();
-  }, [fetchChats]);
+  }, []);
 
   /* 
-  	TODO: component too big - consider breaking it down into smaller components
+  	TODO: component too big - consider breaking it down
   */
 
   return (

@@ -9,7 +9,6 @@ export default function DarkModeToggle() {
       checked={isDarkMode}
       onChange={toggleDarkMode}
       size={30}
-      className="fixed top-4 right-4 z-50"
       sunColor="#f59e0b"
       moonColor="#fafafa"
     />

@@ -2,9 +2,10 @@ import BotImage from '@/assets/images/bot.svg';
 
 interface MascotProps {
   state: 'loading' | 'idle' | 'error' | 'not-found';
+  animate?: 'pulse' | 'bounce';
 }
 
-export default function Mascot({ state }: MascotProps) {
+export default function Mascot({ state, animate }: MascotProps) {
   let label: string;
 
   if (!state) {
@@ -31,7 +32,7 @@ export default function Mascot({ state }: MascotProps) {
 
   return (
     <div className="flex items-center flex-col justify-center w-full h-full">
-      <div>
+      <div className={`animate-${animate}`}>
         <img src={BotImage} alt="No chats" className="w-24 h-24" />
       </div>
       <p className="text-slate-800 dark:text-slate-500 mt-4">{label}</p>

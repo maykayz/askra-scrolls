@@ -29,13 +29,13 @@ export default function ChatBox() {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center rounded-2xl">
+    <div className="flex flex-row items-center justify-center rounded-2xl ">
       <Input
         type="text"
         value={message}
         onChange={e => setMessage(e.target.value)}
         placeholder="Ask anything you want to know ..."
-        className="flex-grow mr-2 border-0 focus:border-0 focus:ring-0 focus:outline-none bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-200 rounded-lg shadow-sm"
+        className="flex-grow mr-2 border-0 shadow-none text-gray-900 dark:text-gray-200 rounded-lg ring-0 focus-visible:ring-0 "
         onKeyDown={e => {
           if (e.key === 'Enter') {
             handleSend();
@@ -47,7 +47,7 @@ export default function ChatBox() {
       <Button
         onClick={handleSend}
         variant="secondary"
-        className="bg-gray-100 dark:bg-black hover:scale-110 transition-transform duration-200"
+        className="bg-gray-100 dark:bg-black hover:scale-120 transition-transform duration-200 cursor-pointer"
       >
         <Send className="text-primary-900 dark:text-gray-100" />
       </Button>
