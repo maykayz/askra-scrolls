@@ -42,7 +42,8 @@ export default function ChatPanel() {
       <div
         className={`sticky left-0 right-0 bottom-10 w-3/4 mx-auto transition-all duration-300
         bg-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-sm border border-white/30 p-4
-        `}>
+        `}
+      >
         <ChatBox />
       </div>
     </div>
