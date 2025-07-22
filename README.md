@@ -37,18 +37,21 @@ This will:
 Choose one of the following package managers:
 
 #### Using `pnpm`
+
 ```bash
 pnpm install
 pnpm dev
 ```
 
 #### Using `yarn`
+
 ```bash
 yarn install
 yarn dev
 ```
 
 #### Using `npm`
+
 ```bash
 npm install
 npm run dev
@@ -73,7 +76,7 @@ npm run dev
 │   ├── types/            # Type declarations
 │   ├── utils/            # Utility functions
 │   ├── App.tsx           # Root component
-│   ├── layout.tsx          # Main layout 
+│   ├── layout.tsx          # Main layout
 │   └── main.tsx          # Entry point
 ├── .env.example          # Example environment config
 ├── Dockerfile            # Docker build file
@@ -106,11 +109,13 @@ VITE_API_URL = "http://localhost:8000"
 ## ▶️ Running the Project
 
 ### With Docker:
+
 ```bash
 docker compose up --build
 ```
 
 ### Locally:
+
 ```bash
 pnpm dev  # or yarn dev or npm run dev
 ```
@@ -133,7 +138,6 @@ Then go to: [http://localhost:3000](http://localhost:3000)
 - ⚡ **Tailwind CSS + Animate CSS** — Utility-first styling enhanced with animations
 - 🔄 **Vite + SWC** — Fast dev server and optimized builds using Vite and `@vitejs/plugin-react-swc`
 
-
 ---
 
 ## ✅ Assumptions
@@ -150,16 +154,14 @@ Then go to: [http://localhost:3000](http://localhost:3000)
 
 - Minimal error handling and validation
 - User cannot delete individual chat
-- 
-
+-
 
 ### Suggested Improvements
 
 - Allow user to choose which document to interact
 - Add unit and integration tests (Jest + RTL)
 - Improve accessibility and i18n support
-- Share the generated chat or articles as a public URL, or allow the section to be printable 
+- Share the generated chat or articles as a public URL, or allow the section to be printable
 - Speech-to-text integration for user chat box
-
 
 ---
