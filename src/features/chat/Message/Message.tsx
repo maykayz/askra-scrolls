@@ -1,17 +1,25 @@
 import { TypeAnimation } from 'react-type-animation';
-import { Atom } from 'react-loading-indicators';
+import { useCallback } from 'react';
 
 import { checkIfLessThanOneMinuteOld } from '@/utils/date';
 import type { Message } from '@/types/chat';
+import { LoaderCircle } from 'lucide-react';
 
 export default function Message({ message }: { message: Message }) {
   const isLoading = message.is_typing;
   const isNewMessage = checkIfLessThanOneMinuteOld(message.timestamp);
 
-  const Loading = () => (
-    <div className="-scale-40">
-      <Atom color="#fefefe" size="small" />
-    </div>
+  const Loading = useCallback(
+    () => (
+      <div className="-scale-40 -ml-8">
+        <LoaderCircle
+          className="animate-spin text-slate-950 dark:text-white"
+          size={50}
+          strokeWidth={2}
+        />
+      </div>
+    ),
+    []
   );
   const AnswerWithAnimation = () => (
     <TypeAnimation
