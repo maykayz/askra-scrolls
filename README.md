@@ -154,7 +154,6 @@ Then go to: [http://localhost:3000](http://localhost:3000)
 
 - Minimal error handling and validation
 - User cannot delete individual chat
--
 
 ### Suggested Improvements
 
